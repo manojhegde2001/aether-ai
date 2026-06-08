@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aether AI Platform
 
-## Getting Started
+**AI Agents That Actually Get Work Done**
 
-First, run the development server:
+Aether AI is a premium, enterprise-grade SaaS platform that allows users to deploy autonomous, intelligent AI agents for customer support, sales, research, and workflow automation.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Marketing Website**: High-conversion landing pages with premium design and animations.
+- **Authentication**: Secure role-based authentication using NextAuth.js (Auth.js) and JWT sessions.
+- **Dashboard**: Role-based access control (Admin & User views).
+- **Agent Management**: CRUD operations for deploying and managing AI agents.
+- **User Management**: Admin interface for managing platform users.
+- **Responsive Design**: Mobile-first layouts using Tailwind CSS and shadcn/ui.
+- **Dark Mode**: Fully implemented dark mode using css variables.
+- **Database**: MongoDB integration via Mongoose.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js (v20+)
+- MongoDB instance (local or Atlas)
 
-## Learn More
+### Installation
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Update `.env.local` with your MongoDB URI and a secure `AUTH_SECRET`.
+4. Seed the database (creates default admin and user accounts):
+   ```bash
+   node scripts/seed.js
+   ```
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+### Test Credentials
+- **Admin**: `admin@aether.ai` | `Password123!`
+- **User**: `user@aether.ai` | `Password123!`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment Steps (Vercel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push code to GitHub.
+2. Import project in Vercel.
+3. Add Environment Variables (`MONGODB_URI`, `AUTH_SECRET`, `NEXTAUTH_URL`).
+4. Click Deploy.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel will automatically detect the Next.js framework and handle the build process.
