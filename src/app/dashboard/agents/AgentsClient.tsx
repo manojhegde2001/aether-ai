@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface Agent {
   id: string;
@@ -140,23 +141,22 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
             className="max-w-sm bg-white/5 border-white/10" 
           />
-          <select
-            value={statusFilter}
-            onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
-            className="rounded-md border border-white/10 bg-zinc-900 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 max-w-[150px]"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="ACTIVE">Active</option>
-            <option value="INACTIVE">Inactive</option>
-            <option value="MAINTENANCE">Maintenance</option>
-          </select>
+          <Select value={statusFilter} onValueChange={(val) => { setStatusFilter(val || "ALL"); setCurrentPage(1); }}>
+            <SelectTrigger className="w-[150px] bg-white/5 border-white/10">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent className="bg-zinc-950 border-white/10 text-white">
+              <SelectItem value="ALL">All Statuses</SelectItem>
+              <SelectItem value="ACTIVE">Active</SelectItem>
+              <SelectItem value="INACTIVE">Inactive</SelectItem>
+              <SelectItem value="MAINTENANCE">Maintenance</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger render={
-            <Button onClick={openCreate} className="bg-indigo-600 hover:bg-indigo-700 text-white border-0">
-              <Plus className="mr-2 h-4 w-4" /> New Agent
-            </Button>
-          } />
+          <DialogTrigger onClick={openCreate} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white border-0">
+            <Plus className="mr-2 h-4 w-4" /> New Agent
+          </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-zinc-950 border-white/10 text-white">
             <DialogHeader>
               <DialogTitle>{isEditing ? "Edit Agent" : "Create Agent"}</DialogTitle>
@@ -187,33 +187,31 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <select 
-                  id="category"
-                  value={formData.category}
-                  onChange={e => setFormData({...formData, category: e.target.value})}
-                  className="w-full rounded-md border border-white/10 bg-zinc-900 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                >
-                  <option value="Customer Support">Customer Support</option>
-                  <option value="Research">Research</option>
-                  <option value="Sales">Sales</option>
-                  <option value="Workflow">Workflow Automation</option>
-                </select>
+                <Select value={formData.category} onValueChange={val => setFormData({...formData, category: val || ""})}>
+                  <SelectTrigger className="bg-white/5 border-white/10 w-full">
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-zinc-950 border-white/10 text-white">
+                    <SelectItem value="Customer Support">Customer Support</SelectItem>
+                    <SelectItem value="Research">Research</SelectItem>
+                    <SelectItem value="Sales">Sales</SelectItem>
+                    <SelectItem value="Workflow Automation">Workflow Automation</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               {isEditing && (
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
-                  <select 
-                    id="status"
-                    value={formData.status}
-                    onChange={e => setFormData({...formData, status: e.target.value})}
-                    className="w-full rounded-md border border-white/10 bg-zinc-900 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    required
-                  >
-                    <option value="ACTIVE">Active</option>
-                    <option value="INACTIVE">Inactive</option>
-                    <option value="MAINTENANCE">Maintenance</option>
-                  </select>
+                  <Select value={formData.status} onValueChange={val => setFormData({...formData, status: val || ""})}>
+                    <SelectTrigger className="bg-white/5 border-white/10 w-full">
+                      <SelectValue placeholder="Select a status" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-zinc-950 border-white/10 text-white">
+                      <SelectItem value="ACTIVE">Active</SelectItem>
+                      <SelectItem value="INACTIVE">Inactive</SelectItem>
+                      <SelectItem value="MAINTENANCE">Maintenance</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               )}
               <DialogFooter>

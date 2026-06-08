@@ -37,11 +37,9 @@ export function Topbar({ user }: TopbarProps) {
         </div>
 
         <DropdownMenu>
-          <DropdownMenuTrigger render={
-            <Button variant="ghost" size="icon" className="rounded-full bg-white/5 border border-white/10">
-              <UserIcon className="h-5 w-5 text-indigo-400" />
-            </Button>
-          } />
+          <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-full bg-white/5 border border-white/10 h-10 w-10 text-sm font-medium transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50">
+            <UserIcon className="h-5 w-5 text-indigo-400" />
+          </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56 bg-zinc-950 border-white/10 text-white">
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">

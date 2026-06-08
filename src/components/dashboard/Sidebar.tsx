@@ -21,8 +21,6 @@ export function Sidebar({ role }: SidebarProps) {
     links.push({ name: "Users", href: "/dashboard/users", icon: Users });
   }
 
-  links.push({ name: "Settings", href: "/dashboard/settings", icon: Settings });
-
   return (
     <div className="flex h-full w-64 flex-col border-r border-border/40 bg-background/95 backdrop-blur hidden md:flex">
       <div className="flex h-14 items-center border-b border-border/40 px-4">

@@ -5,7 +5,7 @@ import { Agent } from "@/models/Agent";
 import { auth } from "@/auth";
 
 export const metadata = {
-  title: "Dashboard | Aether AI",
+  title: "Dashboard",
 };
 
 export default async function DashboardPage() {
