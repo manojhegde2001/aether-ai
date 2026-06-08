@@ -28,7 +28,7 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-white/5 border-white/10">
+        <Card className="bg-background border-border">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Agents</CardTitle>
             <Bot className="h-4 w-4 text-muted-foreground" />
@@ -38,7 +38,7 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
         
-        <Card className="bg-white/5 border-white/10">
+        <Card className="bg-background border-border">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active Agents</CardTitle>
             <Activity className="h-4 w-4 text-green-400" />
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white/5 border-white/10">
+        <Card className="bg-background border-border">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Tasks Completed</CardTitle>
             <CheckCircle className="h-4 w-4 text-indigo-400" />
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white/5 border-white/10">
+        <Card className="bg-background border-border">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Avg. Response Time</CardTitle>
             <Clock className="h-4 w-4 text-orange-400" />

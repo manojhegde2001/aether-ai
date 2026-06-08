@@ -139,13 +139,13 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             placeholder="Search agents..." 
             value={searchQuery}
             onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-            className="max-w-sm bg-white/5 border-white/10" 
+            className="max-w-sm bg-background border-border" 
           />
           <Select value={statusFilter} onValueChange={(val) => { setStatusFilter(val || "ALL"); setCurrentPage(1); }}>
-            <SelectTrigger className="w-[150px] bg-white/5 border-white/10">
+            <SelectTrigger className="w-[150px] bg-background border-border">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-950 border-white/10 text-white">
+            <SelectContent >
               <SelectItem value="ALL">All Statuses</SelectItem>
               <SelectItem value="ACTIVE">Active</SelectItem>
               <SelectItem value="INACTIVE">Inactive</SelectItem>
@@ -157,7 +157,7 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
           <DialogTrigger onClick={openCreate} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white border-0">
             <Plus className="mr-2 h-4 w-4" /> New Agent
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-zinc-950 border-white/10 text-white">
+          <DialogContent className="sm:max-w-[425px] bg-popover text-popover-foreground border-border">
             <DialogHeader>
               <DialogTitle>{isEditing ? "Edit Agent" : "Create Agent"}</DialogTitle>
               <DialogDescription className="text-muted-foreground">
@@ -188,10 +188,10 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
                 <Select value={formData.category} onValueChange={val => setFormData({...formData, category: val || ""})}>
-                  <SelectTrigger className="bg-white/5 border-white/10 w-full">
+                  <SelectTrigger className="bg-background border-border w-full">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
-                  <SelectContent className="bg-zinc-950 border-white/10 text-white">
+                  <SelectContent >
                     <SelectItem value="Customer Support">Customer Support</SelectItem>
                     <SelectItem value="Research">Research</SelectItem>
                     <SelectItem value="Sales">Sales</SelectItem>
@@ -203,10 +203,10 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select value={formData.status} onValueChange={val => setFormData({...formData, status: val || ""})}>
-                    <SelectTrigger className="bg-white/5 border-white/10 w-full">
+                    <SelectTrigger className="bg-background border-border w-full">
                       <SelectValue placeholder="Select a status" />
                     </SelectTrigger>
-                    <SelectContent className="bg-zinc-950 border-white/10 text-white">
+                    <SelectContent >
                       <SelectItem value="ACTIVE">Active</SelectItem>
                       <SelectItem value="INACTIVE">Inactive</SelectItem>
                       <SelectItem value="MAINTENANCE">Maintenance</SelectItem>
@@ -237,13 +237,13 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
           </TableHeader>
           <TableBody>
             {paginatedAgents.length === 0 ? (
-              <TableRow className="border-white/10 hover:bg-white/5">
+              <TableRow className="border-border hover:bg-muted/50">
                 <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
                   {agents.length === 0 ? "No agents found. Create your first agent to get started." : "No agents match your filters."}
                 </TableCell>
               </TableRow>
             ) : paginatedAgents.map((agent) => (
-              <TableRow key={agent.id} className="border-white/10 hover:bg-white/5">
+              <TableRow key={agent.id} className="border-border hover:bg-muted/50">
                 <TableCell className="font-medium">
                   <div>{agent.name}</div>
                   <div className="text-xs text-muted-foreground">{agent.description}</div>
@@ -280,7 +280,7 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             size="sm"
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="border-white/10 hover:bg-white/5"
+            className="border-border hover:bg-muted/50"
           >
             Previous
           </Button>
@@ -292,7 +292,7 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             size="sm"
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="border-white/10 hover:bg-white/5"
+            className="border-border hover:bg-muted/50"
           >
             Next
           </Button>

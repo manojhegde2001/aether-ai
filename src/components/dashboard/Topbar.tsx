@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -32,24 +33,26 @@ export function Topbar({ user }: TopbarProps) {
           <Input
             type="search"
             placeholder="Search..."
-            className="w-full bg-white/5 pl-8 border-white/10 h-9"
+            className="w-full bg-background pl-8 border-border h-9"
           />
         </div>
 
         <DropdownMenu>
-          <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-full bg-white/5 border border-white/10 h-10 w-10 text-sm font-medium transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50">
+          <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-full bg-background border border-border h-10 w-10 text-sm font-medium transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50">
             <UserIcon className="h-5 w-5 text-indigo-400" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 bg-zinc-950 border-white/10 text-white">
-            <DropdownMenuLabel>
-              <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
-                <p className="text-xs leading-none text-muted-foreground">
-                  {user?.email || 'email@example.com'}
-                </p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-white/10" />
+          <DropdownMenuContent align="end" >
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {user?.email || 'email@example.com'}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator  />
             <DropdownMenuItem 
               className="text-red-400 focus:bg-red-500/10 focus:text-red-400 cursor-pointer"
               onClick={() => signOut({ callbackUrl: '/login' })}
