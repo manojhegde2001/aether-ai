@@ -40,6 +40,9 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
   const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState<Agent | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   
   const [formData, setFormData] = useState({
     name: "",
@@ -50,10 +53,15 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const filteredAgents = agents.filter(agent => 
-    agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    agent.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredAgents = agents.filter(agent => {
+    const matchesSearch = agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          agent.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === "ALL" || agent.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
+  const totalPages = Math.ceil(filteredAgents.length / itemsPerPage) || 1;
+  const paginatedAgents = filteredAgents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,12 +133,24 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <Input 
-          placeholder="Search agents..." 
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-sm bg-white/5 border-white/10" 
-        />
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <Input 
+            placeholder="Search agents..." 
+            value={searchQuery}
+            onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+            className="max-w-sm bg-white/5 border-white/10" 
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
+            className="rounded-md border border-white/10 bg-zinc-900 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 max-w-[150px]"
+          >
+            <option value="ALL">All Statuses</option>
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
+            <option value="MAINTENANCE">Maintenance</option>
+          </select>
+        </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger render={
             <Button onClick={openCreate} className="bg-indigo-600 hover:bg-indigo-700 text-white border-0">
@@ -218,13 +238,13 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredAgents.length === 0 ? (
+            {paginatedAgents.length === 0 ? (
               <TableRow className="border-white/10 hover:bg-white/5">
                 <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-                  {agents.length === 0 ? "No agents found. Create your first agent to get started." : "No agents match your search."}
+                  {agents.length === 0 ? "No agents found. Create your first agent to get started." : "No agents match your filters."}
                 </TableCell>
               </TableRow>
-            ) : filteredAgents.map((agent) => (
+            ) : paginatedAgents.map((agent) => (
               <TableRow key={agent.id} className="border-white/10 hover:bg-white/5">
                 <TableCell className="font-medium">
                   <div>{agent.name}</div>
@@ -254,6 +274,32 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
           </TableBody>
         </Table>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-4 pt-4">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="border-white/10 hover:bg-white/5"
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="border-white/10 hover:bg-white/5"
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
