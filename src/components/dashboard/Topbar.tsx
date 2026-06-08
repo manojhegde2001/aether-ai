@@ -37,11 +37,11 @@ export function Topbar({ user }: TopbarProps) {
         </div>
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger render={
             <Button variant="ghost" size="icon" className="rounded-full bg-white/5 border border-white/10">
               <UserIcon className="h-5 w-5 text-indigo-400" />
             </Button>
-          </DropdownMenuTrigger>
+          } />
           <DropdownMenuContent align="end" className="w-56 bg-zinc-950 border-white/10 text-white">
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">

@@ -121,11 +121,11 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
       <div className="flex justify-between items-center">
         <Input placeholder="Search agents..." className="max-w-sm bg-white/5 border-white/10" />
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
+          <DialogTrigger render={
             <Button onClick={openCreate} className="bg-indigo-600 hover:bg-indigo-700 text-white border-0">
               <Plus className="mr-2 h-4 w-4" /> New Agent
             </Button>
-          </DialogTrigger>
+          } />
           <DialogContent className="sm:max-w-[425px] bg-zinc-950 border-white/10 text-white">
             <DialogHeader>
               <DialogTitle>{isEditing ? "Edit Agent" : "Create Agent"}</DialogTitle>
