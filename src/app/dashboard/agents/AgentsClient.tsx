@@ -39,6 +39,7 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
   const [agents, setAgents] = useState(initialAgents);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState<Agent | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   
   const [formData, setFormData] = useState({
     name: "",
@@ -48,6 +49,11 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const filteredAgents = agents.filter(agent => 
+    agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    agent.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,8 +124,13 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <Input placeholder="Search agents..." className="max-w-sm bg-white/5 border-white/10" />
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <Input 
+          placeholder="Search agents..." 
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="max-w-sm bg-white/5 border-white/10" 
+        />
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger render={
             <Button onClick={openCreate} className="bg-indigo-600 hover:bg-indigo-700 text-white border-0">
@@ -207,13 +218,13 @@ export default function AgentsClient({ initialAgents }: { initialAgents: Agent[]
             </TableRow>
           </TableHeader>
           <TableBody>
-            {agents.length === 0 ? (
+            {filteredAgents.length === 0 ? (
               <TableRow className="border-white/10 hover:bg-white/5">
                 <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-                  No agents found. Create your first agent to get started.
+                  {agents.length === 0 ? "No agents found. Create your first agent to get started." : "No agents match your search."}
                 </TableCell>
               </TableRow>
-            ) : agents.map((agent) => (
+            ) : filteredAgents.map((agent) => (
               <TableRow key={agent.id} className="border-white/10 hover:bg-white/5">
                 <TableCell className="font-medium">
                   <div>{agent.name}</div>

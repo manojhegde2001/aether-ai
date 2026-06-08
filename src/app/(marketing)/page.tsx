@@ -1,5 +1,11 @@
 import { Hero } from "@/components/marketing/Hero";
 import { Features } from "@/components/marketing/Features";
+import { HowItWorks } from "@/components/marketing/HowItWorks";
+import { ServicesOverview } from "@/components/marketing/ServicesOverview";
+import { Stats } from "@/components/marketing/Stats";
+import { Testimonials } from "@/components/marketing/Testimonials";
+import { Pricing } from "@/components/marketing/Pricing";
+import { FAQ } from "@/components/marketing/FAQ";
 
 export const metadata = {
   title: "Aether AI - AI Agents That Actually Get Work Done",
@@ -26,6 +32,12 @@ export default function MarketingPage() {
       </section>
 
       <Features />
+      <HowItWorks />
+      <ServicesOverview />
+      <Stats />
+      <Testimonials />
+      <Pricing />
+      <FAQ />
       
       {/* CTA Section */}
       <section className="relative py-24 bg-background overflow-hidden">

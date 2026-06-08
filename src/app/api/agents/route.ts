@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const category = searchParams.get("category");
     
-    let query: any = {};
+    const query: Record<string, string> = {};
     
     if (session.user.role !== "ADMIN") {
       query.owner = session.user.id;

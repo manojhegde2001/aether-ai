@@ -26,6 +26,12 @@ interface User {
 export default function UsersClient({ initialUsers }: { initialUsers: User[] }) {
   const router = useRouter();
   const [users, setUsers] = useState(initialUsers);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredUsers = users.filter(user => 
+    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleRoleChange = async (id: string, newRole: string) => {
     try {
@@ -59,7 +65,12 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <Input placeholder="Search users by email..." className="max-w-sm bg-white/5 border-white/10" />
+        <Input 
+          placeholder="Search users by email or name..." 
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="max-w-sm bg-white/5 border-white/10" 
+        />
       </div>
 
       <div className="rounded-md border border-white/10 bg-white/5">
@@ -74,13 +85,13 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.length === 0 ? (
+            {filteredUsers.length === 0 ? (
               <TableRow className="border-white/10 hover:bg-white/5">
                 <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-                  No users found.
+                  {users.length === 0 ? "No users found." : "No users match your search."}
                 </TableCell>
               </TableRow>
-            ) : users.map((user) => (
+            ) : filteredUsers.map((user) => (
               <TableRow key={user.id} className="border-white/10 hover:bg-white/5">
                 <TableCell className="font-medium">
                   {user.name}
