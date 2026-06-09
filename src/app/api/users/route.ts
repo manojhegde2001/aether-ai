@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import dbConnect from "@/lib/mongodb";
 import { User } from "@/models/User";
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const session = await auth();
     if (!session?.user || session.user.role !== "ADMIN") {

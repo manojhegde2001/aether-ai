@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, Cpu, Zap } from "lucide-react";
+import { ArrowRight, Bot, Zap } from "lucide-react";
 
 export function Hero() {
   return (

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bot, Home, Users, Settings, Zap } from "lucide-react";
+import { Bot, Home, Users, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {

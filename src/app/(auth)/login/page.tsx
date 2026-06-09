@@ -51,7 +51,7 @@ function LoginForm() {
 
       router.push("/dashboard");
       router.refresh();
-    } catch (err: any) {
+    } catch {
       setError("An unexpected error occurred");
     }
   };
@@ -114,7 +114,7 @@ function LoginForm() {
       </form>
 
       <div className="mt-6 text-center text-sm">
-        <span className="text-muted-foreground">Don't have an account? </span>
+        <span className="text-muted-foreground">Don&apos;t have an account? </span>
         <Link href="/register" className="font-medium text-indigo-400 hover:text-indigo-300">
           Sign up
         </Link>

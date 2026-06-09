@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create({
+    await User.create({
       name,
       email,
       password: hashedPassword,
@@ -38,9 +38,9 @@ export async function POST(req: Request) {
       { message: "User created successfully" },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: "Internal server error", error: error.message },
+      { message: "Internal server error", error: error instanceof Error ? error.message : "Unknown error" },
       { status: 500 }
     );
   }

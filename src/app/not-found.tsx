@@ -13,7 +13,7 @@ export default function NotFound() {
           404 - Page Not Found
         </h1>
         <p className="text-muted-foreground mb-8 text-lg">
-          The agent you dispatched couldn't find the page you're looking for. It might have been moved or deleted.
+          The agent you dispatched couldn&apos;t find the page you&apos;re looking for. It might have been moved or deleted.
         </p>
         <Link href="/">
           <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white w-full sm:w-auto">

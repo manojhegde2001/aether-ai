@@ -30,7 +30,7 @@ export default function AboutPage() {
             Founded in 2024, Aether AI started with a simple observation: while large language models are incredibly powerful, they require too much manual prompting and orchestration to be truly useful in complex business workflows.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            We set out to build a platform where AI doesn't just answer questions, but takes action. Today, thousands of companies use our infrastructure to deploy agents that work 24/7, resolving tickets, finding leads, and managing operations.
+            We set out to build a platform where AI doesn&apos;t just answer questions, but takes action. Today, thousands of companies use our infrastructure to deploy agents that work 24/7, resolving tickets, finding leads, and managing operations.
           </p>
         </div>
         <div className="relative h-64 md:h-full rounded-2xl bg-zinc-900 overflow-hidden border border-white/10 flex items-center justify-center p-8">

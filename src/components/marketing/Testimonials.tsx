@@ -29,7 +29,7 @@ export function Testimonials() {
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl mb-4">Loved by innovative teams</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our customers have to say about Aether AI.
+            Don&apos;t just take our word for it. Here&apos;s what our customers have to say about Aether AI.
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export function Testimonials() {
                     ))}
                   </div>
                   <p className="text-muted-foreground mb-6 flex-grow">
-                    "{t.quote}"
+                    &quot;{t.quote}&quot;
                   </p>
                   <div>
                     <div className="font-bold text-white">{t.author}</div>
